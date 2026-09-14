@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 
-<html class="h-full bg-[#0d0a14]" lang="en"><head>
+<html class="h-full bg-[#eeeffb]" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
 <title>HAVCAN - Creative Work, Handled.</title>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%235320c9'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='52' font-family='Arial' font-weight='700' fill='white'%3EH%3C/text%3E%3C/svg%3E" rel="icon"/>
 <!-- Tailwind CSS v3 with Plugins -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Font Awesome & Google Fonts -->
@@ -53,6 +54,35 @@
       -webkit-tap-highlight-color: transparent;
       font-feature-settings: "cv02", "cv03", "cv04", "cv11";
       overscroll-behavior-y: none;
+      background: #eeeffb;
+    }
+    .screen-view { min-height: 100%; }
+    .reference-card {
+      border: 1px solid #ece8fb;
+      box-shadow: 0 7px 18px rgba(91, 55, 145, 0.08);
+    }
+    .reference-purple {
+      color: #5320c9;
+    }
+    .wizard-step.is-current .wizard-dot {
+      background: #5320c9;
+      color: white;
+      box-shadow: 0 0 0 4px #e7dcff;
+    }
+    .wizard-step.is-complete .wizard-dot {
+      background: #5320c9;
+      color: white;
+    }
+    .wizard-step.is-current .wizard-label,
+    .wizard-step.is-complete .wizard-label { color: #5320c9; }
+    .wizard-step.is-complete .wizard-line { background: #5320c9; }
+    .service-list-icon {
+      background: #f2edff;
+      color: #5320c9;
+    }
+    .chat-dark-surface {
+      background: #110d1b;
+      background-image: radial-gradient(circle at 50% 45%, rgba(91, 35, 196, .23), transparent 32%);
     }
     .no-scrollbar::-webkit-scrollbar {
       display: none;
@@ -86,9 +116,9 @@
     .wave-anim-5 { animation: wave-bar 1.1s infinite ease-in-out 0.3s; }
   </style>
 </head>
-<body class="h-full w-full flex justify-center items-center bg-[#0d0a14] font-sans antialiased select-none p-0 md:p-6">
+<body class="h-full w-full flex justify-center items-center bg-[#eeeffb] font-sans antialiased select-none p-0 md:p-6">
 <!-- Mobile Device Frame Container -->
-<div class="relative w-full max-w-[425px] h-[100dvh] max-h-[920px] bg-[#FBF9FE] text-[#17121F] flex flex-col shadow-2xl overflow-hidden md:rounded-[44px] md:border-[10px] md:border-[#1E1B29]" id="device-container">
+<div class="relative w-full max-w-[425px] h-[100dvh] max-h-[920px] bg-[#FBF9FE] text-[#17121F] flex flex-col shadow-2xl overflow-hidden md:rounded-[44px] md:border-[10px] md:border-white" id="device-container">
 <!-- iOS Status Bar -->
 <header class="w-full flex justify-between items-center px-7 pt-3.5 pb-2 text-xs font-semibold tracking-tight text-gray-900 z-30 select-none bg-transparent">
 <span id="live-clock">9:41</span>
@@ -121,20 +151,19 @@
 </div>
 </div>
 <!-- Hero Card -->
-<div class="mt-4 relative overflow-hidden rounded-[26px] bg-gradient-to-br from-[#2D0B5A] via-[#481A8B] to-[#6D28D9] p-6 text-white shadow-xl">
-<div class="absolute -right-10 -top-10 w-44 h-44 bg-purple-400/20 rounded-full blur-2xl pointer-events-none"></div>
-<div class="absolute right-3 bottom-2 w-28 h-28 opacity-75 pointer-events-none">
-<svg class="w-full h-full drop-shadow-2xl" viewbox="0 0 200 200">
-<polygon fill="#B388FF" opacity="0.9" points="100,20 170,60 100,100 30,60"></polygon>
-<polygon fill="#7C3AED" opacity="0.95" points="30,60 100,100 100,180 30,140"></polygon>
-<polygon fill="#581C87" points="100,100 170,60 170,140 100,180"></polygon>
+<div class="mt-4 relative overflow-hidden rounded-[26px] bg-white p-5 text-gray-950 reference-card">
+<div class="absolute right-2 bottom-1 w-28 h-28 opacity-90 pointer-events-none">
+<svg class="w-full h-full drop-shadow-xl" viewbox="0 0 200 200">
+<polygon fill="#B88CFF" points="100,18 170,58 100,98 30,58"></polygon>
+<polygon fill="#7C3AED" points="30,58 100,98 100,178 30,138"></polygon>
+<polygon fill="#4C1D95" points="100,98 170,58 170,138 100,178"></polygon>
 </svg>
 </div>
-<div class="relative z-10 max-w-[210px]">
-<h1 class="text-[26px] font-serif leading-[1.18] font-bold text-white tracking-tight">
-              Have an idea?<br/>Let's make it happen.
+<div class="relative z-10 max-w-[220px]">
+<h1 class="text-[25px] font-serif leading-[1.16] font-bold text-gray-950 tracking-tight">
+              Have an idea?<br/>Let’s make it <span class="text-brand-primary">happen.</span>
             </h1>
-<p class="text-xs text-purple-200/90 mt-2.5 font-normal">
+<p class="text-[10px] text-gray-500 mt-2.5 font-normal">
               Creative work, handled from idea to delivery.
             </p>
 </div>
@@ -155,20 +184,13 @@
 <div class="mt-6" id="home-services-section">
 <div class="flex items-center justify-between mb-3">
 <div>
-<h2 class="text-base font-bold text-gray-900">All Services</h2>
+<h2 class="text-base font-bold text-gray-900">Popular Services</h2>
 <p class="text-[11px] text-gray-500">Pick a creative service to begin</p>
 </div>
-<span class="text-[11px] font-semibold bg-purple-100 text-brand-primary px-2.5 py-0.5 rounded-full">10 Services</span>
+<button class="text-[11px] font-semibold text-brand-primary" onclick="switchNav('services', document.getElementById('nav-btn-services'))">See all</button>
 </div>
-<!-- Category Filter Pills -->
-<div class="flex space-x-1.5 overflow-x-auto no-scrollbar pb-2 mb-2 text-xs">
-<button class="home-cat-pill active px-3 py-1 rounded-full bg-brand-primary text-white font-semibold text-[11px] transition whitespace-nowrap" onclick="filterHomeServices('all', this)">All</button>
-<button class="home-cat-pill px-3 py-1 rounded-full bg-white border border-purple-100 text-gray-600 font-medium text-[11px] hover:border-brand-primary transition whitespace-nowrap" onclick="filterHomeServices('design', this)">Design &amp; Branding</button>
-<button class="home-cat-pill px-3 py-1 rounded-full bg-white border border-purple-100 text-gray-600 font-medium text-[11px] hover:border-brand-primary transition whitespace-nowrap" onclick="filterHomeServices('video', this)">Video &amp; Motion</button>
-<button class="home-cat-pill px-3 py-1 rounded-full bg-white border border-purple-100 text-gray-600 font-medium text-[11px] hover:border-brand-primary transition whitespace-nowrap" onclick="filterHomeServices('web', this)">Web &amp; Dev</button>
-</div>
-<!-- Services Grid (All 10 services cleanly mapped) -->
-<div class="grid grid-cols-2 gap-2.5" id="home-services-grid">
+<!-- Home service rail mirrors the compact reference cards. -->
+<div class="flex space-x-2.5 overflow-x-auto no-scrollbar pb-1" id="home-services-grid">
 <!-- Injected dynamically via renderHomeServices() -->
 </div>
 </div>
@@ -239,10 +261,29 @@
 </div>
 </div>
 </section>
+<!-- SCREEN 2: SERVICES -->
+<section class="screen-view hidden flex-col px-5 pt-1" id="screen-services">
+<div class="flex items-center justify-between py-2 mb-2">
+<div>
+<h2 class="text-xl font-bold text-gray-950">Services</h2>
+<p class="text-[11px] text-gray-500 mt-0.5">Find the right creative partner for your idea.</p>
+</div>
+<button class="w-9 h-9 rounded-full bg-white flex items-center justify-center text-brand-primary reference-card" onclick="triggerSearchFromHome()">
+<i class="fa-solid fa-magnifying-glass text-sm"></i>
+</button>
+</div>
+<div class="flex space-x-1.5 overflow-x-auto no-scrollbar pb-2 mb-2">
+<button class="service-filter active px-3 py-1.5 rounded-full bg-brand-primary text-white text-[11px] font-semibold whitespace-nowrap" onclick="filterServicesList('all', this)">All</button>
+<button class="service-filter px-3 py-1.5 rounded-full bg-white border border-purple-100 text-gray-600 text-[11px] whitespace-nowrap" onclick="filterServicesList('design', this)">Design</button>
+<button class="service-filter px-3 py-1.5 rounded-full bg-white border border-purple-100 text-gray-600 text-[11px] whitespace-nowrap" onclick="filterServicesList('video', this)">Video</button>
+<button class="service-filter px-3 py-1.5 rounded-full bg-white border border-purple-100 text-gray-600 text-[11px] whitespace-nowrap" onclick="filterServicesList('web', this)">Web</button>
+</div>
+<div class="space-y-2.5 pb-8" id="services-list-container"></div>
+</section>
 <!-- SCREEN 3: SERVICE DETAIL -->
 <section class="screen-view hidden flex-col px-5 pt-1" id="screen-service-detail">
 <div class="flex items-center justify-between py-2 mb-2">
-<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 shadow-sm border border-gray-100" onclick="switchScreen('screen-home')">
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 shadow-sm border border-gray-100" onclick="switchScreen(detailReturnScreen)">
 <i class="fa-solid fa-arrow-left text-sm"></i>
 </button>
 <div class="flex items-center space-x-2">
@@ -308,72 +349,64 @@
 <!-- SCREEN 4: START A PROJECT -->
 <section class="screen-view hidden flex-col px-5 pt-1" id="screen-start-project">
 <div class="flex items-center space-x-3 py-2 border-b border-gray-100 mb-3">
-<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 shadow-sm border border-gray-100" onclick="switchScreen('screen-home')">
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 shadow-sm border border-gray-100" onclick="switchScreen(detailReturnScreen)">
 <i class="fa-solid fa-arrow-left text-sm"></i>
 </button>
 <h2 class="text-lg font-bold text-gray-900">Start a Project</h2>
 </div>
-<div class="flex justify-between items-center py-2 px-1 mb-4">
-<div class="flex flex-col items-center">
-<div class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center text-xs font-bold">1</div>
-<span class="text-[10px] font-medium text-brand-primary mt-1">Details</span>
-</div>
-<div class="flex-1 h-[2px] bg-purple-100 mx-1"></div>
-<div class="flex flex-col items-center">
-<div class="w-8 h-8 rounded-full bg-purple-100 text-gray-400 flex items-center justify-center text-xs font-bold">2</div>
-<span class="text-[10px] font-medium text-gray-400 mt-1">Files</span>
-</div>
-<div class="flex-1 h-[2px] bg-purple-100 mx-1"></div>
-<div class="flex flex-col items-center">
-<div class="w-8 h-8 rounded-full bg-purple-100 text-gray-400 flex items-center justify-center text-xs font-bold">3</div>
-<span class="text-[10px] font-medium text-gray-400 mt-1">Deadline</span>
-</div>
-<div class="flex-1 h-[2px] bg-purple-100 mx-1"></div>
-<div class="flex flex-col items-center">
-<div class="w-8 h-8 rounded-full bg-purple-100 text-gray-400 flex items-center justify-center text-xs font-bold">4</div>
-<span class="text-[10px] font-medium text-gray-400 mt-1">Budget</span>
-</div>
+<div class="flex items-start justify-between py-2 px-1 mb-4" id="project-wizard-steps">
+<div class="wizard-step is-current flex flex-col items-center" data-step="1"><div class="wizard-dot w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold">1</div><span class="wizard-label text-[9px] font-medium mt-1">Details</span></div>
+<div class="wizard-line flex-1 h-[2px] bg-purple-100 mt-3 mx-1"></div>
+<div class="wizard-step flex flex-col items-center" data-step="2"><div class="wizard-dot w-7 h-7 rounded-full bg-purple-100 text-gray-400 flex items-center justify-center text-[10px] font-bold">2</div><span class="wizard-label text-[9px] font-medium text-gray-400 mt-1">Files</span></div>
+<div class="wizard-line flex-1 h-[2px] bg-purple-100 mt-3 mx-1"></div>
+<div class="wizard-step flex flex-col items-center" data-step="3"><div class="wizard-dot w-7 h-7 rounded-full bg-purple-100 text-gray-400 flex items-center justify-center text-[10px] font-bold">3</div><span class="wizard-label text-[9px] font-medium text-gray-400 mt-1">Deadline</span></div>
+<div class="wizard-line flex-1 h-[2px] bg-purple-100 mt-3 mx-1"></div>
+<div class="wizard-step flex flex-col items-center" data-step="4"><div class="wizard-dot w-7 h-7 rounded-full bg-purple-100 text-gray-400 flex items-center justify-center text-[10px] font-bold">4</div><span class="wizard-label text-[9px] font-medium text-gray-400 mt-1">Budget</span></div>
+<div class="wizard-line flex-1 h-[2px] bg-purple-100 mt-3 mx-1"></div>
+<div class="wizard-step flex flex-col items-center" data-step="5"><div class="wizard-dot w-7 h-7 rounded-full bg-purple-100 text-gray-400 flex items-center justify-center text-[10px] font-bold">5</div><span class="wizard-label text-[9px] font-medium text-gray-400 mt-1">Review</span></div>
 </div>
 <form class="space-y-4" id="project-creation-form" onsubmit="event.preventDefault(); submitProjectWizard();">
 <div class="p-3 bg-purple-50 rounded-2xl border border-purple-100 flex items-center justify-between">
 <div class="flex items-center space-x-3">
-<div class="w-9 h-9 rounded-xl bg-brand-primary text-white flex items-center justify-center text-sm">
-<i class="fa-solid fa-shapes"></i>
+<div class="w-9 h-9 rounded-xl bg-brand-primary text-white flex items-center justify-center text-sm"><i class="fa-solid fa-shapes"></i></div>
+<div><span class="text-[10px] text-gray-500 uppercase tracking-wider block">Service</span><span class="text-xs font-bold text-gray-900" id="form-selected-service">Video Editing</span></div>
 </div>
-<div>
-<span class="text-[10px] text-gray-500 uppercase tracking-wider block">Service</span>
-<span class="text-xs font-bold text-gray-900" id="form-selected-service">Video Editing</span>
+<button class="text-xs text-brand-primary font-semibold" onclick="switchNav('services', document.getElementById('nav-btn-services'))" type="button">Change</button>
 </div>
-</div>
-<button class="text-xs text-brand-primary font-semibold" onclick="switchNav('home', document.getElementById('nav-btn-home'))" type="button">Change</button>
-</div>
-<div>
+<div class="wizard-panel" data-panel="1">
 <label class="text-xs font-semibold text-gray-800 block mb-1">Project description <span class="text-brand-primary">*</span></label>
-<textarea class="w-full text-xs rounded-xl border-purple-100 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary p-3" id="proj-desc" placeholder="Tell us about your project, goals and expectations..." required="" rows="3"></textarea>
+<textarea class="w-full text-xs rounded-xl border-purple-100 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary p-3" id="proj-desc" placeholder="Tell us about your project, goals and expectations..." required="" rows="4"></textarea>
 </div>
-<div>
+<div class="wizard-panel hidden" data-panel="2">
 <label class="text-xs font-semibold text-gray-800 block mb-1">Reference files</label>
-<div class="border-2 border-dashed border-purple-200 hover:border-brand-primary rounded-2xl p-4 text-center bg-white cursor-pointer transition" onclick="document.getElementById('file-upload-input').click()">
-<div class="w-10 h-10 mx-auto rounded-full bg-purple-50 text-brand-primary flex items-center justify-center text-base mb-1.5">
-<i class="fa-solid fa-cloud-arrow-up"></i>
-</div>
+<div class="border-2 border-dashed border-purple-200 hover:border-brand-primary rounded-2xl p-5 text-center bg-white cursor-pointer transition" onclick="document.getElementById('file-upload-input').click()">
+<div class="w-10 h-10 mx-auto rounded-full bg-purple-50 text-brand-primary flex items-center justify-center text-base mb-1.5"><i class="fa-solid fa-cloud-arrow-up"></i></div>
 <p class="text-xs font-medium text-gray-700"><span class="text-brand-primary font-semibold">Tap to upload</span> or drag &amp; drop</p>
+<p class="text-[10px] text-gray-400 mt-1">Images, videos, documents (optional)</p>
 <input class="hidden" id="file-upload-input" multiple="" onchange="handleFileSelected(event)" type="file"/>
 </div>
 <div class="mt-2 space-y-1 text-xs" id="uploaded-files-list"></div>
 </div>
-<div>
+<div class="wizard-panel hidden" data-panel="3">
+<label class="text-xs font-semibold text-gray-800 block mb-1">Deadline <span class="text-brand-primary">*</span></label>
+<div class="relative"><i class="fa-regular fa-calendar absolute left-3 top-3 text-gray-400 text-xs"></i><input class="w-full text-xs rounded-xl border-purple-100 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary pl-9 p-2.5" id="proj-deadline" type="date"/></div>
+<p class="text-[10px] text-gray-400 mt-1">Choose the date you’d like the first deliverable.</p>
+</div>
+<div class="wizard-panel hidden" data-panel="4">
 <label class="text-xs font-semibold text-gray-800 block mb-1">Budget (approx.) <span class="text-brand-primary">*</span></label>
 <select class="w-full text-xs rounded-xl border-purple-100 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary p-2.5" id="proj-budget">
-<option value="₹2,000 - ₹5,000">₹2,000 - ₹5,000 (Standard)</option>
-<option value="₹5,000 - ₹12,000">₹5,000 - ₹12,000 (Growth)</option>
-<option value="₹12,000 - ₹30,000">₹12,000 - ₹30,000 (Enterprise)</option>
+<option value="₹2,000 - ₹5,000">₹2,000 - ₹5,000 (Standard)</option><option value="₹5,000 - ₹12,000">₹5,000 - ₹12,000 (Growth)</option><option value="₹12,000 - ₹30,000">₹12,000 - ₹30,000 (Enterprise)</option>
 </select>
+<label class="text-xs font-semibold text-gray-800 block mt-4 mb-1">Additional notes</label>
+<textarea class="w-full text-xs rounded-xl border-purple-100 focus:border-brand-primary focus:ring-1 focus:ring-brand-primary p-3" id="proj-notes" placeholder="Anything else we should know?" rows="3"></textarea>
 </div>
-<button class="w-full py-3.5 bg-brand-primary text-white rounded-2xl font-semibold shadow-lg shadow-brand-500/25 active:scale-[0.98] transition flex items-center justify-center space-x-2 mt-4" type="submit">
-<span>Continue</span>
-<i class="fa-solid fa-arrow-right text-xs"></i>
-</button>
+<div class="wizard-panel hidden" data-panel="5">
+<div class="bg-white rounded-2xl border border-purple-100 p-4 space-y-3" id="project-review-card"></div>
+</div>
+<div class="flex gap-2 pt-1">
+<button class="hidden flex-1 py-3.5 bg-white text-gray-700 border border-purple-100 rounded-2xl font-semibold text-xs" id="wizard-back-btn" onclick="previousWizardStep()" type="button">Back</button>
+<button class="flex-1 py-3.5 bg-brand-primary text-white rounded-2xl font-semibold shadow-lg shadow-brand-500/25 active:scale-[0.98] transition flex items-center justify-center space-x-2" id="wizard-next-btn" type="submit"><span>Continue</span><i class="fa-solid fa-arrow-right text-xs"></i></button>
+</div>
 </form>
 </section>
 <!-- SCREEN 5: SEARCH (RELIABLE LIVE FILTER & TABS) -->
@@ -381,11 +414,22 @@
 <div class="py-2">
 <div class="relative flex items-center">
 <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-gray-400 text-sm"></i>
-<input class="w-full pl-10 pr-9 py-2.5 text-xs bg-white border border-purple-100 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary shadow-sm" id="main-search-input" oninput="handleLiveSearch(this.value)" placeholder="Search services, videos, branding..." type="text"/>
+<input class="w-full pl-10 pr-9 py-2.5 text-xs bg-white border border-purple-100 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-primary shadow-sm" id="main-search-input" onfocus="showSearchSuggestions()" oninput="handleLiveSearch(this.value)" placeholder="Search services or creative work..." type="text"/>
 <button class="absolute right-3 text-gray-400 hover:text-gray-600" onclick="clearSearchInput()">
 <i class="fa-solid fa-circle-xmark text-xs"></i>
 </button>
 </div>
+</div>
+<div class="bg-white rounded-2xl border border-purple-50 shadow-sm p-3 mb-3" id="search-suggestions-panel">
+<div class="flex items-center justify-between mb-2"><h3 class="text-xs font-bold text-gray-900">Popular Categories</h3><span class="text-[10px] text-gray-400">Explore</span></div>
+<div class="flex flex-wrap gap-1.5 mb-3">
+<button class="text-[10px] px-2.5 py-1 rounded-full bg-purple-50 text-brand-primary" onclick="applySearchQuery('Video Editing')">Video Editing</button>
+<button class="text-[10px] px-2.5 py-1 rounded-full bg-purple-50 text-brand-primary" onclick="applySearchQuery('Website')">Website Design</button>
+<button class="text-[10px] px-2.5 py-1 rounded-full bg-purple-50 text-brand-primary" onclick="applySearchQuery('Logo')">Logo Design</button>
+<button class="text-[10px] px-2.5 py-1 rounded-full bg-purple-50 text-brand-primary" onclick="applySearchQuery('Poster')">Poster Design</button>
+</div>
+<div class="flex items-center justify-between mb-1"><h3 class="text-xs font-bold text-gray-900">Recent Searches</h3><button class="text-[10px] text-brand-primary" onclick="clearRecentSearches()">Clear</button></div>
+<div class="space-y-1" id="recent-searches-list"></div>
 </div>
 <!-- Search Mode Tabs -->
 <div class="flex border-b border-purple-100 mt-2 mb-3">
@@ -424,7 +468,7 @@
 <button class="order-filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium bg-white text-gray-600 border border-gray-100" onclick="filterOrders('completed', this)">Completed</button>
 </div>
 <div class="space-y-3 mt-3 pb-8" id="orders-container">
-<div class="p-3.5 bg-white rounded-2xl border border-purple-50 shadow-sm cursor-pointer hover:shadow-md transition" onclick="switchScreen('screen-order-detail')">
+<div class="p-3.5 bg-white rounded-2xl border border-purple-50 shadow-sm cursor-pointer hover:shadow-md transition" onclick="switchScreen('screen-project-detail')">
 <div class="flex items-center justify-between mb-2">
 <div class="flex items-center space-x-2.5">
 <div class="w-10 h-10 rounded-xl bg-purple-900 flex items-center justify-center text-white">
@@ -528,6 +572,32 @@
           </button>
 </div>
 </section>
+<!-- SCREEN 7B: PROJECT DETAILS -->
+<section class="screen-view hidden flex-col px-5 pt-1" id="screen-project-detail">
+<div class="flex items-center space-x-3 py-2 mb-2">
+<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 shadow-sm border border-gray-100" onclick="switchScreen('screen-orders')"><i class="fa-solid fa-arrow-left text-sm"></i></button>
+<h2 class="text-lg font-bold text-gray-900">Project Details</h2>
+</div>
+<div class="bg-white p-4 rounded-2xl reference-card">
+<div class="flex items-start justify-between"><div><span class="text-[10px] text-gray-400 font-bold">PROJECT #HVN-0012</span><h3 class="text-base font-bold text-gray-950 mt-0.5">Video Editing</h3><p class="text-[10px] text-gray-500 mt-1">Social Media Campaign Video</p></div><span class="text-[10px] font-bold px-2 py-1 rounded-full bg-purple-100 text-brand-primary">In Progress</span></div>
+<div class="grid grid-cols-3 gap-2 mt-4 text-center"><div class="bg-purple-50 rounded-xl p-2"><span class="text-[9px] text-gray-400 block">Order ID</span><b class="text-[10px] text-gray-800">#HVN-0012</b></div><div class="bg-purple-50 rounded-xl p-2"><span class="text-[9px] text-gray-400 block">Date</span><b class="text-[10px] text-gray-800">Apr 28, 2025</b></div><div class="bg-purple-50 rounded-xl p-2"><span class="text-[9px] text-gray-400 block">Budget</span><b class="text-[10px] text-gray-800">₹3,500</b></div></div>
+</div>
+<div class="mt-4 bg-white p-4 rounded-2xl reference-card">
+<h3 class="text-xs font-bold text-gray-900 mb-4">Project Timeline</h3>
+<div class="space-y-4 relative pl-5 before:content-[''] before:absolute before:left-2 before:top-2 before:bottom-2 before:w-[2px] before:bg-purple-100">
+<div class="relative"><div class="absolute -left-5 top-0.5 w-4 h-4 rounded-full bg-brand-primary text-white flex items-center justify-center text-[9px]"><i class="fa-solid fa-check"></i></div><b class="text-xs text-gray-900 block">Request</b><span class="text-[10px] text-gray-400">Apr 28, 09:15 AM</span></div>
+<div class="relative"><div class="absolute -left-5 top-0.5 w-4 h-4 rounded-full bg-brand-primary text-white flex items-center justify-center text-[9px]"><i class="fa-solid fa-check"></i></div><b class="text-xs text-gray-900 block">Confirmed</b><span class="text-[10px] text-gray-400">Apr 28, 11:20 AM</span></div>
+<div class="relative"><div class="absolute -left-5 top-0.5 w-4 h-4 rounded-full bg-brand-primary ring-4 ring-purple-100 flex items-center justify-center"><div class="w-1.5 h-1.5 bg-white rounded-full"></div></div><b class="text-xs text-brand-primary block">In Progress</b><span class="text-[10px] text-gray-400">Apr 29, 02:40 PM</span></div>
+<div class="relative"><div class="absolute -left-5 top-0.5 w-4 h-4 rounded-full bg-gray-200"></div><span class="text-xs text-gray-400">Quality Check</span></div>
+<div class="relative"><div class="absolute -left-5 top-0.5 w-4 h-4 rounded-full bg-gray-200"></div><span class="text-xs text-gray-400">Client Review</span></div>
+</div>
+</div>
+<div class="mt-4 bg-white p-4 rounded-2xl reference-card">
+<div class="flex items-center justify-between mb-3"><h3 class="text-xs font-bold text-gray-900">Assigned Professional</h3><span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 font-bold">Active</span></div>
+<div class="flex items-center justify-between"><div class="flex items-center space-x-2.5"><img alt="Aarav Mehta" class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&amp;auto=format&amp;fit=crop&amp;q=80"/><div><b class="text-xs text-gray-900 block">Aarav Mehta</b><span class="text-[10px] text-gray-500">Video Editor</span></div></div><button class="px-3 py-1.5 bg-brand-primary text-white rounded-lg text-[10px] font-bold" onclick="openChatThread('Aarav Mehta','Video Editor')">Message</button></div>
+</div>
+<div class="mt-4 mb-6"><button class="w-full py-3 bg-brand-primary text-white rounded-xl text-xs font-bold" onclick="switchScreen('screen-share-files')">Share Files <i class="fa-solid fa-arrow-right ml-1"></i></button></div>
+</section>
 <!-- SCREEN 8: CHAT LIST -->
 <section class="screen-view hidden flex-col px-5 pt-1" id="screen-chat-list">
 <div class="flex items-center justify-between py-2 mb-2">
@@ -585,6 +655,13 @@
 <span class="text-[10px] text-gray-400">1:32 PM</span>
 <span class="w-4 h-4 rounded-full bg-brand-primary text-white text-[9px] font-bold flex items-center justify-center">1</span>
 </div>
+</div>
+<div class="p-3 bg-white rounded-2xl border border-purple-50 flex items-center justify-between cursor-pointer hover:bg-purple-50/50 transition" onclick="openSupportChat()">
+<div class="flex items-center space-x-3">
+<div class="w-11 h-11 rounded-full bg-purple-100 text-brand-primary flex items-center justify-center"><i class="fa-solid fa-shapes"></i></div>
+<div class="max-w-[190px]"><h4 class="text-xs font-bold text-gray-900 truncate">HAVCAN Support</h4><p class="text-[11px] text-gray-500 truncate">How can we help you today?</p></div>
+</div>
+<span class="text-[10px] text-gray-400">Now</span>
 </div>
 </div>
 </section>
@@ -732,6 +809,25 @@
 </div>
 </div>
 </section>
+<!-- SCREEN 9B: SHARE FILES -->
+<section class="screen-view hidden flex-col px-5 pt-1" id="screen-share-files">
+<div class="flex items-center space-x-3 py-2 mb-2"><button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 shadow-sm border border-gray-100" onclick="switchScreen('screen-project-detail')"><i class="fa-solid fa-arrow-left text-sm"></i></button><h2 class="text-lg font-bold text-gray-900">Share Files</h2></div>
+<div class="flex border-b border-purple-100 mb-4"><button class="flex-1 py-2 text-xs font-bold text-brand-primary border-b-2 border-brand-primary">Files</button><button class="flex-1 py-2 text-xs text-gray-400">Photos</button><button class="flex-1 py-2 text-xs text-gray-400">Drive</button></div>
+<div class="border-2 border-dashed border-purple-200 rounded-2xl p-5 text-center bg-white cursor-pointer mb-4" onclick="document.getElementById('share-screen-file').click()"><div class="w-10 h-10 mx-auto rounded-full bg-purple-50 text-brand-primary flex items-center justify-center text-base mb-1.5"><i class="fa-solid fa-cloud-arrow-up"></i></div><p class="text-xs font-semibold text-gray-800"><span class="text-brand-primary">Tap to upload</span> or drag and drop</p><p class="text-[10px] text-gray-400 mt-1">Images, videos, documents (optional)</p><input class="hidden" id="share-screen-file" multiple type="file" onchange="renderSharedFiles(event)"/></div>
+<div class="flex items-center justify-between mb-2"><h3 class="text-xs font-bold text-gray-900">Recent Files</h3><span class="text-[10px] text-gray-400">Select to share</span></div>
+<div class="space-y-2" id="shared-files-list">
+<div class="bg-white rounded-xl border border-purple-50 p-3 flex items-center justify-between"><div class="flex items-center space-x-2.5"><div class="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center"><i class="fa-solid fa-file-pdf"></i></div><div><b class="text-[11px] text-gray-900 block">Brand_Guidelines.pdf</b><span class="text-[9px] text-gray-400">2.4 MB • Apr 26, 2025</span></div></div><i class="fa-regular fa-circle text-gray-300"></i></div>
+<div class="bg-white rounded-xl border border-purple-50 p-3 flex items-center justify-between"><div class="flex items-center space-x-2.5"><div class="w-8 h-8 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center"><i class="fa-solid fa-file-image"></i></div><div><b class="text-[11px] text-gray-900 block">Reference_Image.jpg</b><span class="text-[9px] text-gray-400">1.8 MB • Apr 25, 2025</span></div></div><i class="fa-regular fa-circle text-gray-300"></i></div>
+<div class="bg-white rounded-xl border border-purple-50 p-3 flex items-center justify-between"><div class="flex items-center space-x-2.5"><div class="w-8 h-8 rounded-lg bg-purple-50 text-brand-primary flex items-center justify-center"><i class="fa-solid fa-file-image"></i></div><div><b class="text-[11px] text-gray-900 block">Logo_Concepts.zip</b><span class="text-[9px] text-gray-400">12.6 MB • Apr 24, 2025</span></div></div><i class="fa-regular fa-circle text-gray-300"></i></div>
+</div>
+<button class="w-full mt-5 mb-6 py-3.5 bg-brand-primary text-white rounded-xl font-bold text-xs" onclick="sendSharedFiles()">Upload &amp; Share</button>
+</section>
+<!-- SCREEN 9C: HAVCAN SUPPORT -->
+<section class="screen-view hidden flex-col px-4 pt-1 h-full relative" id="screen-support-chat">
+<div class="flex items-center justify-between py-2.5"><div class="flex items-center space-x-2.5"><button class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-gray-700 shadow-sm border border-gray-100" onclick="switchScreen('screen-chat-list')"><i class="fa-solid fa-arrow-left text-xs"></i></button><div class="w-9 h-9 rounded-full bg-brand-primary text-white flex items-center justify-center"><i class="fa-solid fa-shapes text-sm"></i></div><div><h3 class="text-xs font-bold text-gray-900">HAVCAN Support</h3><p class="text-[10px] text-emerald-600">Online</p></div></div><i class="fa-solid fa-ellipsis-vertical text-gray-500 text-xs"></i></div>
+<div class="chat-dark-surface flex-1 rounded-[24px] p-5 flex flex-col items-center justify-center text-white shadow-xl min-h-[440px]"><div class="w-16 h-16 rounded-2xl bg-brand-primary/30 flex items-center justify-center mb-4"><i class="fa-solid fa-comment-dots text-3xl text-purple-200"></i></div><h3 class="text-base font-bold">No messages yet</h3><p class="text-[10px] text-purple-200 mt-1 text-center max-w-[190px]">Start a conversation with HAVCAN support team. We're here to help.</p><button class="mt-5 px-5 py-2.5 bg-brand-primary rounded-xl text-[10px] font-bold" onclick="document.getElementById('support-chat-input').focus()">Send a Message</button></div>
+<div class="bg-white rounded-full p-1.5 shadow-xl border border-purple-100 flex items-center space-x-2 my-3"><button class="w-9 h-9 rounded-full bg-purple-100 text-brand-primary flex items-center justify-center" onclick="toggleSupportAttachment()"><i class="fa-solid fa-plus text-sm"></i></button><input class="flex-1 text-xs border-0 focus:ring-0 px-2 bg-transparent" id="support-chat-input" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendSupportMessage()"/><button class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center text-xs" onclick="sendSupportMessage()"><i class="fa-solid fa-arrow-up"></i></button></div>
+</section>
 <!-- SCREEN 10: PROFILE -->
 <section class="screen-view hidden flex-col px-5 pt-1" id="screen-profile">
 <div class="flex justify-between items-center py-2">
@@ -861,13 +957,7 @@
         </button>
 </div>
 </div>
-<!-- UPDATED BOTTOM NAVIGATION:
-     1. Home (fa-house)
-     2. Search (fa-magnifying-glass)
-     3. Orders (fa-receipt)
-     4. Chat (fa-comment-dots)
-     5. Profile (fa-user)
--->
+<!-- REFERENCE BOTTOM NAVIGATION: Home, Services, Orders, Search, Profile -->
 <nav class="absolute bottom-4 left-4 right-4 bg-[#17121F]/95 backdrop-blur-lg rounded-full py-2.5 px-2 flex justify-around items-center text-gray-400 z-40 shadow-nav border border-purple-950/40" id="global-bottom-nav">
 <button class="nav-item active flex flex-col items-center transition relative py-1" id="nav-btn-home" onclick="switchNav('home', this)">
 <div class="w-8 h-8 rounded-full flex items-center justify-center text-white bg-brand-primary shadow-glow">
@@ -875,11 +965,11 @@
 </div>
 <span class="text-[9px] font-semibold mt-0.5 text-white">Home</span>
 </button>
-<button class="nav-item flex flex-col items-center transition relative py-1" id="nav-btn-search" onclick="switchNav('search', this)">
+<button class="nav-item flex flex-col items-center transition relative py-1" id="nav-btn-services" onclick="switchNav('services', this)">
 <div class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white">
-<i class="fa-solid fa-magnifying-glass text-sm"></i>
+<i class="fa-solid fa-shapes text-sm"></i>
 </div>
-<span class="text-[9px] font-medium mt-0.5 text-gray-400">Search</span>
+<span class="text-[9px] font-medium mt-0.5 text-gray-400">Services</span>
 </button>
 <button class="nav-item flex flex-col items-center transition relative py-1" id="nav-btn-orders" onclick="switchNav('orders', this)">
 <div class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white relative">
@@ -888,12 +978,11 @@
 </div>
 <span class="text-[9px] font-medium mt-0.5 text-gray-400">Orders</span>
 </button>
-<button class="nav-item flex flex-col items-center transition relative py-1" id="nav-btn-chat" onclick="switchNav('chat', this)">
+<button class="nav-item flex flex-col items-center transition relative py-1" id="nav-btn-search" onclick="switchNav('search', this)">
 <div class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white relative">
-<i class="fa-solid fa-comment-dots text-sm"></i>
-<span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-brand-accent rounded-full ring-2 ring-[#17121F]"></span>
+<i class="fa-solid fa-magnifying-glass text-sm"></i>
 </div>
-<span class="text-[9px] font-medium mt-0.5 text-gray-400">Chat</span>
+<span class="text-[9px] font-medium mt-0.5 text-gray-400">Search</span>
 </button>
 <button class="nav-item flex flex-col items-center transition relative py-1" id="nav-btn-profile" onclick="switchNav('profile', this)">
 <div class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white">
@@ -1011,33 +1100,55 @@
 
     let currentSearchTab = 'services';
     let currentHomeCategory = 'all';
+    let recentSearches = ['Logo Design', 'Video Editing', 'Website Development', 'Poster Design', 'Brand Identity'];
 
     function renderHomeServices(filterCat = 'all') {
       const container = document.getElementById('home-services-grid');
       if (!container) return;
 
-      const filtered = filterCat === 'all' 
-        ? HAVCAN_SERVICES 
+      const filtered = filterCat === 'all'
+        ? HAVCAN_SERVICES.slice(0, 4)
         : HAVCAN_SERVICES.filter(s => s.category === filterCat);
 
       container.innerHTML = filtered.map(srv => `
         <div onclick="openServiceDetail('${escapeHTML(srv.title)}')" 
-             class="bg-white p-3 rounded-2xl border border-purple-50 shadow-sm flex flex-col justify-between cursor-pointer hover:border-brand-primary hover:shadow-md transition active:scale-[0.98]">
+             class="min-w-[112px] w-[112px] bg-white p-2.5 rounded-2xl border border-purple-50 shadow-sm flex flex-col justify-between cursor-pointer hover:border-brand-primary hover:shadow-md transition active:scale-[0.98]">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-purple-50 text-brand-primary flex items-center justify-center text-base mb-2">
+            <div class="w-9 h-9 rounded-xl bg-purple-50 text-brand-primary flex items-center justify-center text-sm mb-2">
               <i class="fa-solid ${srv.icon}"></i>
             </div>
-            <h4 class="text-xs font-bold text-gray-900 leading-snug">${srv.title}</h4>
-            <p class="text-[10px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">${srv.desc}</p>
+            <h4 class="text-[10px] font-bold text-gray-900 leading-snug line-clamp-2">${srv.title}</h4>
           </div>
-          <div class="mt-2.5 pt-2 border-t border-purple-50/70 flex items-center justify-between">
-            <span class="text-[11px] font-bold text-brand-primary">${srv.price}</span>
-            <div class="w-5 h-5 rounded-full bg-purple-50 text-brand-primary flex items-center justify-center text-[10px]">
-              <i class="fa-solid fa-arrow-right"></i>
-            </div>
+          <div class="mt-2 pt-1.5 flex items-center justify-between">
+            <span class="text-[9px] font-bold text-brand-primary">${srv.price}</span>
+            <i class="fa-solid fa-arrow-right text-[9px] text-brand-primary"></i>
           </div>
         </div>
       `).join('');
+    }
+
+    let currentServiceFilter = 'all';
+    function renderServicesList(filter = currentServiceFilter) {
+      currentServiceFilter = filter;
+      const container = document.getElementById('services-list-container');
+      if (!container) return;
+      const services = filter === 'all' ? HAVCAN_SERVICES : HAVCAN_SERVICES.filter(s => s.category === filter);
+      container.innerHTML = services.map(srv => `
+        <article class="reference-card bg-white rounded-2xl p-3.5 flex items-center justify-between cursor-pointer" onclick="openServiceDetail('${escapeHTML(srv.title)}')">
+          <div class="flex items-center space-x-3 min-w-0">
+            <div class="service-list-icon w-11 h-11 rounded-xl flex items-center justify-center text-base flex-shrink-0"><i class="fa-solid ${srv.icon}"></i></div>
+            <div class="min-w-0"><h3 class="text-xs font-bold text-gray-900 truncate">${srv.title}</h3><p class="text-[10px] text-gray-400 mt-0.5 line-clamp-1">${srv.desc}</p><span class="text-[10px] font-bold text-brand-primary mt-1 inline-block">Starting from ${srv.price}</span></div>
+          </div>
+          <i class="fa-solid fa-chevron-right text-[10px] text-gray-300 ml-2"></i>
+        </article>`).join('');
+    }
+
+    function filterServicesList(category, btn) {
+      document.querySelectorAll('.service-filter').forEach(button => {
+        button.className = 'service-filter px-3 py-1.5 rounded-full bg-white border border-purple-100 text-gray-600 text-[11px] whitespace-nowrap';
+      });
+      btn.className = 'service-filter active px-3 py-1.5 rounded-full bg-brand-primary text-white text-[11px] font-semibold whitespace-nowrap';
+      renderServicesList(category);
     }
 
     function filterHomeServices(category, btn) {
@@ -1071,6 +1182,26 @@
       renderSearchResults(query);
     }
 
+    function renderRecentSearches() {
+      const list = document.getElementById('recent-searches-list');
+      if (!list) return;
+      list.innerHTML = recentSearches.map(term => `
+        <button class="w-full flex items-center justify-between py-1 text-left text-[10px] text-gray-500 hover:text-brand-primary" onclick="applySearchQuery('${escapeHTML(term)}')">
+          <span><i class="fa-regular fa-clock mr-2 text-gray-400"></i>${escapeHTML(term)}</span><i class="fa-solid fa-xmark text-gray-300"></i>
+        </button>`).join('');
+    }
+
+    function showSearchSuggestions() {
+      const panel = document.getElementById('search-suggestions-panel');
+      if (panel) panel.classList.remove('hidden');
+      renderRecentSearches();
+    }
+
+    function clearRecentSearches() {
+      recentSearches = [];
+      renderRecentSearches();
+    }
+
     function clearSearchInput() {
       const input = document.getElementById('main-search-input');
       if (input) {
@@ -1084,6 +1215,8 @@
       const input = document.getElementById('main-search-input');
       if (input) {
         input.value = term;
+        recentSearches = [term, ...recentSearches.filter(item => item.toLowerCase() !== term.toLowerCase())].slice(0, 5);
+        renderRecentSearches();
         renderSearchResults(term);
       }
     }
@@ -1245,6 +1378,10 @@
         case 'home': 
           switchScreen('screen-home'); 
           break;
+        case 'services':
+          switchScreen('screen-services');
+          renderServicesList(currentServiceFilter);
+          break;
         case 'search': 
           switchScreen('screen-search'); 
           renderSearchResults(document.getElementById('main-search-input')?.value || '');
@@ -1252,7 +1389,7 @@
         case 'orders': 
           switchScreen('screen-orders'); 
           break;
-        case 'chat': 
+        case 'chat':
           switchScreen('screen-chat-list'); 
           break;
         case 'profile': 
@@ -1277,9 +1414,33 @@
     let secondsElapsed = 0;
 
     function openChatThread(name, role) {
+      if (name === 'HAVCAN Support') {
+        openSupportChat();
+        return;
+      }
       document.getElementById('chat-header-name').innerText = name;
       document.getElementById('chat-header-role').innerText = role;
       switchScreen('screen-chat-thread');
+    }
+
+    function openSupportChat() {
+      switchScreen('screen-support-chat');
+    }
+
+    function sendSupportMessage() {
+      const input = document.getElementById('support-chat-input');
+      if (!input || !input.value.trim()) return;
+      const surface = document.querySelector('#screen-support-chat .chat-dark-surface');
+      const bubble = document.createElement('div');
+      bubble.className = 'absolute bottom-24 right-5 max-w-[72%] bg-brand-primary text-white rounded-2xl rounded-br-sm px-3 py-2 text-[10px] shadow-lg';
+      bubble.textContent = input.value.trim();
+      surface.style.position = 'relative';
+      surface.appendChild(bubble);
+      input.value = '';
+    }
+
+    function toggleSupportAttachment() {
+      openFileAttachmentModal();
     }
 
     function closeChatThread() {
@@ -1418,8 +1579,47 @@
     }
 
     let activeServiceObj = null;
+    let detailReturnScreen = 'screen-home';
+    let projectWizardStep = 1;
+
+    function renderWizardStep() {
+      document.querySelectorAll('.wizard-panel').forEach(panel => {
+        panel.classList.toggle('hidden', Number(panel.dataset.panel) !== projectWizardStep);
+      });
+      document.querySelectorAll('.wizard-step').forEach(step => {
+        const number = Number(step.dataset.step);
+        step.classList.toggle('is-current', number === projectWizardStep);
+        step.classList.toggle('is-complete', number < projectWizardStep);
+        const dot = step.querySelector('.wizard-dot');
+        if (dot && number < projectWizardStep) dot.innerHTML = '<i class="fa-solid fa-check text-[9px]"></i>';
+        else if (dot) dot.textContent = number;
+      });
+      const back = document.getElementById('wizard-back-btn');
+      const next = document.getElementById('wizard-next-btn');
+      if (back) back.classList.toggle('hidden', projectWizardStep === 1);
+      if (next) {
+        next.querySelector('span').textContent = projectWizardStep === 5 ? 'Submit Project' : 'Continue';
+        next.querySelector('i').className = projectWizardStep === 5 ? 'fa-solid fa-check text-xs' : 'fa-solid fa-arrow-right text-xs';
+      }
+      if (projectWizardStep === 5) {
+        const review = document.getElementById('project-review-card');
+        if (review) review.innerHTML = `
+          <div class="flex items-center justify-between"><span class="text-[10px] text-gray-400">Service</span><b class="text-xs text-gray-900">${escapeHTML(document.getElementById('form-selected-service').innerText)}</b></div>
+          <div class="flex items-center justify-between"><span class="text-[10px] text-gray-400">Description</span><b class="text-xs text-gray-900 max-w-[170px] text-right truncate">${escapeHTML(document.getElementById('proj-desc').value || 'Not added')}</b></div>
+          <div class="flex items-center justify-between"><span class="text-[10px] text-gray-400">Deadline</span><b class="text-xs text-gray-900">${escapeHTML(document.getElementById('proj-deadline').value || 'Flexible')}</b></div>
+          <div class="flex items-center justify-between"><span class="text-[10px] text-gray-400">Budget</span><b class="text-xs text-brand-primary">${escapeHTML(document.getElementById('proj-budget').value)}</b></div>`;
+      }
+    }
+
+    function previousWizardStep() {
+      if (projectWizardStep > 1) {
+        projectWizardStep--;
+        renderWizardStep();
+      }
+    }
 
     function openServiceDetail(serviceTitle) {
+      detailReturnScreen = document.querySelector('.screen-view.active')?.id || 'screen-home';
       const service = HAVCAN_SERVICES.find(s => s.title.toLowerCase() === serviceTitle.toLowerCase()) || HAVCAN_SERVICES[2];
       activeServiceObj = service;
       document.getElementById('detail-title').innerText = service.title;
@@ -1448,21 +1648,45 @@
 
     function startProjectFromService(serviceName) {
       document.getElementById('form-selected-service').innerText = serviceName;
+      projectWizardStep = 1;
+      renderWizardStep();
       switchScreen('screen-start-project');
     }
     function startNewProject() {
       document.getElementById('form-selected-service').innerText = 'Custom Creative Project';
+      projectWizardStep = 1;
+      renderWizardStep();
       switchScreen('screen-start-project');
     }
     function submitProjectWizard() {
-      alert('Project request submitted successfully! A creative specialist has been notified.');
+      if (projectWizardStep < 5) {
+        projectWizardStep++;
+        renderWizardStep();
+        return;
+      }
       switchNav('orders', document.getElementById('nav-btn-orders'));
+      alert('Project request submitted successfully! A creative specialist has been notified.');
     }
     function handleFileSelected(e) {
       const files = e.target.files;
       if (files.length) {
-        document.getElementById('uploaded-files-list').innerHTML = `<span class="text-brand-primary font-semibold">✓ ${escapeHTML(files[0].name)}</span> attached`;
+        document.getElementById('uploaded-files-list').innerHTML = Array.from(files).map(file => `<div class="flex items-center justify-between bg-purple-50 rounded-lg px-2.5 py-2"><span class="text-brand-primary font-semibold truncate">${escapeHTML(file.name)}</span><span class="text-[10px] text-gray-400">${Math.ceil(file.size / 1024)} KB</span></div>`).join('');
       }
+    }
+
+    function renderSharedFiles(e) {
+      const list = document.getElementById('shared-files-list');
+      if (!list || !e.target.files.length) return;
+      Array.from(e.target.files).forEach(file => {
+        const row = document.createElement('div');
+        row.className = 'bg-white rounded-xl border border-purple-50 p-3 flex items-center justify-between';
+        row.innerHTML = `<div class="flex items-center space-x-2.5"><div class="w-8 h-8 rounded-lg bg-purple-50 text-brand-primary flex items-center justify-center"><i class="fa-solid fa-file"></i></div><div><b class="text-[11px] text-gray-900 block">${escapeHTML(file.name)}</b><span class="text-[9px] text-gray-400">${Math.ceil(file.size / 1024)} KB • Ready to share</span></div></div><i class="fa-solid fa-check-circle text-brand-primary"></i>`;
+        list.prepend(row);
+      });
+    }
+
+    function sendSharedFiles() {
+      alert('Selected files are ready to share with your creative team.');
     }
 
     function filterOrders(filter, btn) {
@@ -1487,7 +1711,10 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       renderHomeServices('all');
+      renderServicesList('all');
       renderSearchResults('');
+      renderRecentSearches();
+      renderWizardStep();
     });
   </script>
 </body></html>
