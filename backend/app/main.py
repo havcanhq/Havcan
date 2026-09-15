@@ -7,15 +7,19 @@ from typing import AsyncIterator
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from .auth.routes import router as auth_router
 from .core.config import Settings, get_settings
 from .db.mongo import MongoAdapter
 
 
-def create_app(settings: Settings | None = None) -> FastAPI:
+def create_app(
+    settings: Settings | None = None,
+    mongo_adapter: MongoAdapter | None = None,
+) -> FastAPI:
     """Build the API application with explicit, testable dependencies."""
 
     resolved_settings = settings or get_settings()
-    mongo = MongoAdapter(resolved_settings.mongo_uri, resolved_settings.mongo_database)
+    mongo = mongo_adapter or MongoAdapter(resolved_settings.mongo_uri, resolved_settings.mongo_database)
 
     @asynccontextmanager
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:
@@ -32,6 +36,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     )
     application.state.settings = resolved_settings
     application.state.mongo = mongo
+    application.state.auth_indexes_ready = False
+    application.include_router(auth_router)
 
     application.add_middleware(
         CORSMiddleware,

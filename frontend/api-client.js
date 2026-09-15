@@ -1,8 +1,8 @@
 /**
  * Small, dependency-free API client boundary for the existing HAVCAN UI.
  *
- * It is intentionally opt-in: Phase 1 does not replace the current mock
- * interactions or introduce business-domain requests.
+ * It remains small and dependency-free so the existing single-file UI can
+ * progressively adopt real API-backed features without a framework rewrite.
  */
 (function (global) {
   'use strict';
@@ -14,16 +14,27 @@
   }
 
   async function request(path, options) {
+    const requestOptions = { ...(options || {}), credentials: 'include' };
+    if (requestOptions.body && typeof requestOptions.body !== 'string') {
+      requestOptions.body = JSON.stringify(requestOptions.body);
+      requestOptions.headers = {
+        'Content-Type': 'application/json',
+        ...(requestOptions.headers || {}),
+      };
+    }
+
     const response = await fetch(`${getBaseUrl()}${path}`, {
-      ...options,
+      ...requestOptions,
       headers: {
         Accept: 'application/json',
-        ...(options && options.headers ? options.headers : {}),
+        ...(requestOptions.headers || {}),
       },
     });
 
     const contentType = response.headers.get('content-type') || '';
-    const body = contentType.includes('application/json')
+    const body = response.status === 204
+      ? null
+      : contentType.includes('application/json')
       ? await response.json()
       : await response.text();
 
@@ -43,5 +54,11 @@
   global.HavcanAPI = Object.freeze({
     request,
     health: () => request('/health'),
+    register: (payload) => request('/auth/register', { method: 'POST', body: payload }),
+    login: (payload) => request('/auth/login', { method: 'POST', body: payload }),
+    logout: () => request('/auth/logout', { method: 'POST' }),
+    me: () => request('/auth/me'),
+    forgotPassword: (payload) => request('/auth/forgot-password', { method: 'POST', body: payload }),
+    resetPassword: (payload) => request('/auth/reset-password', { method: 'POST', body: payload }),
   });
 })(window);

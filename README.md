@@ -22,6 +22,26 @@ behind the same boundaries for client authentication, admin, professionals,
 services, projects/orders, files, real-time chat, notifications, payments, and
 reviews. Those business features are not part of Phase 1.
 
+## Phase 2 authentication
+
+Phase 2 adds MongoDB-backed authentication without rebuilding the existing UI:
+
+- Public signup always creates a `CLIENT`; `PROFESSIONAL` and `ADMIN` are never
+  selectable during signup.
+- Login, logout, current-session lookup, password reset foundation, HTTP-only
+  sessions, and PBKDF2-SHA256 password hashing are available under
+  `/api/auth`.
+- Users persist with name, email, password hash, role, profile image, active
+  status, email verification status, and timestamps.
+- `get_current_user` and `require_roles(...)` provide reusable server-side
+  protection for future domain routes.
+- The existing profile screen hydrates from `/api/auth/me`; the service worker
+  cache is versioned to include the auth client.
+
+Authentication routes require `MONGO_URI`. The forgot-password endpoint stores a
+hashed, expiring reset token; delivery through an email provider is the next
+integration point and is intentionally not exposed in the API response.
+
 ## Local development
 
 ### Backend
@@ -48,9 +68,10 @@ reviews. Those business features are not part of Phase 1.
    curl http://127.0.0.1:8000/api/health
    ```
 
-MongoDB is optional for the Phase 1 health endpoint. When `MONGO_URI` is
-unset, the response reports `database: "not_configured"` instead of failing
-the API process.
+MongoDB is optional for the health endpoint. When `MONGO_URI` is unset, the
+health response reports `database: "not_configured"` instead of failing the API
+process; authentication endpoints return a configuration error until MongoDB
+is available.
 
 ### Existing UI and PWA
 

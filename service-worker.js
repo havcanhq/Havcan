@@ -1,10 +1,11 @@
-const CACHE_NAME = 'havcan-shell-v1';
+const CACHE_NAME = 'havcan-shell-v2-auth';
 const SHELL_ASSETS = [
   './',
   './index.html',
   './manifest.webmanifest',
   './frontend/api-client.js',
   './frontend/app-state.js',
+  './frontend/auth.js',
   './pwa/register.js',
   './assets/icons/icon-192.svg',
   './assets/icons/icon-512.svg',

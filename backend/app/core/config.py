@@ -17,6 +17,22 @@ class Settings(BaseSettings):
     log_level: str = Field(default="info", validation_alias="LOG_LEVEL")
     mongo_uri: str | None = Field(default=None, validation_alias="MONGO_URI")
     mongo_database: str = Field(default="havcan", validation_alias="MONGO_DATABASE")
+    session_cookie_name: str = Field(
+        default="havcan_session",
+        validation_alias="AUTH_SESSION_COOKIE",
+    )
+    session_ttl_seconds: int = Field(
+        default=60 * 60 * 24 * 14,
+        validation_alias="AUTH_SESSION_TTL_SECONDS",
+    )
+    password_reset_ttl_seconds: int = Field(
+        default=60 * 60,
+        validation_alias="AUTH_PASSWORD_RESET_TTL_SECONDS",
+    )
+    auth_cookie_secure: bool = Field(
+        default=False,
+        validation_alias="AUTH_COOKIE_SECURE",
+    )
     allowed_origins: str = Field(
         default="http://127.0.0.1:4173,http://localhost:4173",
         validation_alias="ALLOWED_ORIGINS",

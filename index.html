@@ -178,7 +178,7 @@
 <span class="absolute top-2 right-2 w-2 h-2 bg-brand-primary rounded-full ring-2 ring-white"></span>
 </button>
 <div class="w-9 h-9 rounded-full overflow-hidden border-2 border-brand-primary/40 cursor-pointer shadow-sm" onclick="switchNav('profile', document.getElementById('nav-btn-profile'))">
-<img alt="Priya Sharma avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkm0jLB0E_TcrdoNVTI-f6XrWTnOPsWBq01KdHZl9lHxUAuAqNDxQ3aj0CRvsqkb6wrNkqpNYBHS9QqVtTjPaLnOC8fLFrMnZevA5AOQLpu6bbDgoFcVeVO4bp8gt0Unu1I7L9DPsV_KVYO3C9-xXfu6xxxag5HsX40IgfxmN4Fbl0CLve4Phbzya8ArQ7Zf0VzlsqiYGGlaxQhnvg6Zen-hPbB7PBazQEPP_CFzEMA3AcN2Qub2Lm"/>
+<img alt="Current user avatar" class="w-full h-full object-cover" data-user-avatar id="current-user-avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkm0jLB0E_TcrdoNVTI-f6XrWTnOPsWBq01KdHZl9lHxUAuAqNDxQ3aj0CRvsqkb6wrNkqpNYBHS9QqVtTjPaLnOC8fLFrMnZevA5AOQLpu6bbDgoFcVeVO4bp8gt0Unu1I7L9DPsV_KVYO3C9-xXfu6xxxag5HsX40IgfxmN4Fbl0CLve4Phbzya8ArQ7Zf0VzlsqiYGGlaxQhnvg6Zen-hPbB7PBazQEPP_CFzEMA3AcN2Qub2Lm"/>
 </div>
 </div>
 </div>
@@ -871,14 +871,14 @@
 <div class="flex flex-col items-center my-4">
 <div class="relative">
 <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-lg ring-2 ring-purple-200">
-<img alt="Priya Sharma" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJQUCH610LR8zJXsGZBGO2yLlmxfq775ceH5H32g9pwcOp5_M-FM0HFnbKZJtdzsSS2zcLF4xM4oNidfq4CPk0CDYYQ8WwDP3iabYi1EEZfBegKvMOnYvVCdtkfQPIa-USoK22n4b2YguRD_9XOwBHOqHJxJkOQHil9jt73sFc6rlsErFa6LeL-w9PB4L2EyUKu6lnBrzyMTq7We9-yNnT-tXtQa_D70lA82mHWzaue81WRcTLCizX"/>
+<img alt="Current user avatar" class="w-full h-full object-cover" data-user-avatar src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJQUCH610LR8zJXsGZBGO2yLlmxfq775ceH5H32g9pwcOp5_M-FM0HFnbKZJtdzsSS2zcLF4xM4oNidfq4CPk0CDYYQ8WwDP3iabYi1EEZfBegKvMOnYvVCdtkfQPIa-USoK22n4b2YguRD_9XOwBHOqHJxJkOQHil9jt73sFc6rlsErFa6LeL-w9PB4L2EyUKu6lnBrzyMTq7We9-yNnT-tXtQa_D70lA82mHWzaue81WRcTLCizX"/>
 </div>
 <button class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center text-[10px] shadow" onclick="alert('Change photo')">
 <i class="fa-solid fa-pencil"></i>
 </button>
 </div>
-<h3 class="text-base font-bold text-gray-950 mt-2" id="profile-user-name">Priya Sharma</h3>
-<p class="text-xs text-gray-500">priya@example.com</p>
+<h3 class="text-base font-bold text-gray-950 mt-2" data-user-name id="profile-user-name">Your profile</h3>
+<p class="text-xs text-gray-500" data-user-email>Loading account…</p>
 </div>
 <div class="bg-white rounded-2xl border border-purple-50 shadow-sm divide-y divide-gray-50 overflow-hidden mb-4">
 <div class="p-3.5 flex items-center justify-between cursor-pointer hover:bg-purple-50/50 transition" onclick="switchNav('orders', document.getElementById('nav-btn-orders'))">
@@ -902,6 +902,13 @@
 </div>
 <i class="fa-solid fa-chevron-right text-gray-300 text-xs"></i>
 </div>
+<button class="w-full p-3.5 flex items-center justify-between text-left hover:bg-red-50/50 transition" id="logout-button" type="button">
+<span class="flex items-center space-x-3 text-red-600">
+<i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+<span class="text-xs font-semibold">Log out</span>
+</span>
+<i class="fa-solid fa-chevron-right text-[10px] text-gray-300"></i>
+</button>
 </div>
 </section>
 </main>
@@ -1023,6 +1030,55 @@
 <span class="text-[9px] font-medium mt-0.5 text-gray-400">Profile</span>
 </button>
 </nav>
+</div>
+<!-- AUTHENTICATION GATE -->
+<div aria-labelledby="auth-title" aria-modal="true" class="absolute inset-0 z-[70] flex items-center justify-center bg-[#FBF9FE] px-5 py-8" id="auth-gate" role="dialog">
+<div class="w-full max-w-sm">
+<div class="flex items-center justify-center space-x-2 mb-8">
+<div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-700 via-brand-primary to-indigo-500 flex items-center justify-center text-white shadow-md shadow-brand-500/30">
+<i class="fa-solid fa-shapes text-xl"></i>
+</div>
+<span class="text-2xl font-black tracking-wider text-gray-950">HAVCAN</span>
+</div>
+<div class="bg-white rounded-[28px] border border-purple-100 shadow-soft p-5">
+<h1 class="text-xl font-bold text-gray-950" id="auth-title">Welcome back</h1>
+<p class="text-xs text-gray-500 mt-1" id="auth-subtitle">Creative work, handled from idea to delivery.</p>
+<div class="flex gap-2 mt-5 p-1 rounded-xl bg-purple-50">
+<button class="flex-1 py-2 rounded-lg text-xs font-semibold text-brand-primary bg-white shadow-sm" data-auth-mode="login" type="button">Log in</button>
+<button class="flex-1 py-2 rounded-lg text-xs font-semibold text-gray-500" data-auth-mode="signup" type="button">Sign up</button>
+</div>
+<p class="text-[11px] min-h-[16px] mt-3" id="auth-status"></p>
+<form class="space-y-3" id="auth-login-form">
+<label class="block text-xs font-semibold text-gray-700">Email<input autocomplete="email" class="mt-1.5 w-full rounded-xl border-purple-100 text-sm focus:border-brand-primary focus:ring-brand-primary" name="email" required type="email"/></label>
+<label class="block text-xs font-semibold text-gray-700">Password<input autocomplete="current-password" class="mt-1.5 w-full rounded-xl border-purple-100 text-sm focus:border-brand-primary focus:ring-brand-primary" name="password" required type="password"/></label>
+<button class="w-full py-3 rounded-xl bg-brand-primary text-white text-xs font-bold shadow-lg shadow-brand-primary/20" id="auth-submit" type="submit"><span data-submit-label>Log in</span></button>
+<button class="w-full text-[11px] text-brand-primary font-semibold" data-auth-mode="forgot" type="button">Forgot password?</button>
+</form>
+<form class="hidden space-y-3" id="auth-signup-form">
+<label class="block text-xs font-semibold text-gray-700">Name<input autocomplete="name" class="mt-1.5 w-full rounded-xl border-purple-100 text-sm focus:border-brand-primary focus:ring-brand-primary" name="name" required type="text"/></label>
+<label class="block text-xs font-semibold text-gray-700">Email<input autocomplete="email" class="mt-1.5 w-full rounded-xl border-purple-100 text-sm focus:border-brand-primary focus:ring-brand-primary" name="email" required type="email"/></label>
+<label class="block text-xs font-semibold text-gray-700">Password<input autocomplete="new-password" class="mt-1.5 w-full rounded-xl border-purple-100 text-sm focus:border-brand-primary focus:ring-brand-primary" name="password" required type="password" minlength="8"/></label>
+<label class="block text-xs font-semibold text-gray-700">Confirm password<input autocomplete="new-password" class="mt-1.5 w-full rounded-xl border-purple-100 text-sm focus:border-brand-primary focus:ring-brand-primary" name="confirm_password" required type="password" minlength="8"/></label>
+<button class="w-full py-3 rounded-xl bg-brand-primary text-white text-xs font-bold shadow-lg shadow-brand-primary/20" type="submit"><span data-submit-label>Create account</span></button>
+</form>
+<div class="hidden" id="auth-forgot-panel">
+<form class="space-y-3" id="auth-forgot-form">
+<label class="block text-xs font-semibold text-gray-700">Account email<input autocomplete="email" class="mt-1.5 w-full rounded-xl border-purple-100 text-sm focus:border-brand-primary focus:ring-brand-primary" name="email" required type="email"/></label>
+<button class="w-full py-3 rounded-xl bg-brand-primary text-white text-xs font-bold" type="submit"><span data-submit-label>Send reset link</span></button>
+</form>
+<div class="border-t border-purple-100 pt-3 mt-4">
+<p class="text-[10px] text-gray-400 mb-2">Already have a reset token?</p>
+<form class="space-y-2" id="auth-reset-form">
+<input class="w-full rounded-xl border-purple-100 text-xs focus:border-brand-primary focus:ring-brand-primary" id="reset-token" name="token" placeholder="Reset token" required type="text"/>
+<input class="w-full rounded-xl border-purple-100 text-xs focus:border-brand-primary focus:ring-brand-primary" name="password" placeholder="New password" required type="password" minlength="8"/>
+<input class="w-full rounded-xl border-purple-100 text-xs focus:border-brand-primary focus:ring-brand-primary" name="confirm_password" placeholder="Confirm new password" required type="password" minlength="8"/>
+<button class="w-full py-2.5 rounded-xl border border-brand-primary text-brand-primary text-xs font-bold" type="submit"><span data-submit-label>Set new password</span></button>
+</form>
+</div>
+<button class="w-full text-[11px] text-brand-primary font-semibold mt-2" data-auth-mode="login" type="button">Back to log in</button>
+</div>
+<p class="text-[10px] text-gray-400 text-center mt-4">By continuing, you agree to use HAVCAN responsibly.</p>
+</div>
 </div>
 <script data-purpose="services-database">
     // All 10 services required by the specification
@@ -1793,5 +1849,6 @@
   </script>
 <script src="./frontend/api-client.js"></script>
 <script src="./frontend/app-state.js"></script>
+<script src="./frontend/auth.js"></script>
 <script src="./pwa/register.js"></script>
 </body></html>
