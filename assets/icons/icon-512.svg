@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>HAVCAN</title>
+  <rect width="512" height="512" rx="112" fill="#5320c9"/>
+  <path fill="#fff" d="M147 123h64v101h90V123h64v266h-64V285h-90v104h-64z"/>
+  <circle cx="400" cy="400" r="27" fill="#c4a7ff"/>
+</svg>
