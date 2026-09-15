@@ -84,6 +84,35 @@
       background: #110d1b;
       background-image: radial-gradient(circle at 50% 45%, rgba(91, 35, 196, .23), transparent 32%);
     }
+    #chat-input-bar.chat-composer-fixed {
+      position: fixed;
+      z-index: 60;
+      left: 50%;
+      bottom: 16px;
+      width: min(393px, calc(100vw - 32px));
+      transform: translateX(-50%);
+      background: #17121f !important;
+      border: 1px solid #3a2457 !important;
+      box-shadow: 0 14px 34px rgba(23, 18, 31, .32);
+    }
+    #chat-input-bar.chat-composer-fixed #chat-input-field {
+      color: #ffffff;
+      caret-color: #c4a7ff;
+    }
+    #chat-input-bar.chat-composer-fixed #chat-input-field::placeholder {
+      color: #a99eb8;
+    }
+    #chat-input-bar.chat-composer-fixed .composer-tool {
+      color: #d1c8dc;
+    }
+    #quick-attach-drawer.quick-attach-fixed {
+      position: fixed;
+      z-index: 59;
+      left: 50%;
+      bottom: 84px;
+      width: min(393px, calc(100vw - 32px));
+      transform: translateX(-50%);
+    }
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -699,7 +728,7 @@
 <span class="text-[10px] font-medium text-gray-400 bg-purple-50/70 px-2.5 py-0.5 rounded-full">Apr 28, 2025</span>
 </div>
 <!-- Chat Messages Feed -->
-<div class="flex-1 space-y-3 pb-28 overflow-y-auto no-scrollbar" id="chat-messages-container">
+<div class="flex-1 space-y-3 pb-32 overflow-y-auto no-scrollbar" id="chat-messages-container">
 <!-- Incoming Text Bubble -->
 <div class="flex items-start space-x-2">
 <img alt="avatar" class="w-7 h-7 rounded-full object-cover mt-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1bruc1W_QvxyaTb35-e7EiMnMJHLGMUgWV53WvQFT9dJl7xMfGR-6HOwn8ds-TpdGLW1t20QDRMG7r9YSqgeWO5lhpbNWZHHLuc9aX6uBKPVJRlW5IbqkFbNigFt5mdnrQxmcVlYuWzofja7N1mAqWDd8pea-nEDqWpL7SMRshOIFxfrtlP6Yf5EJkkvVsko0FZf0Bv-o4QzmgwoXlvT2JsvuPr8wj4bcdLT0zRLUGwW-sbzQpUCW"/>
@@ -762,25 +791,25 @@
 </div>
 </div>
 <!-- DOCKED BOTTOM CHAT BAR (Visible only in Chat Thread, Navigation Bar Hidden) -->
-<div class="absolute bottom-4 left-4 right-4 bg-white rounded-full p-1.5 shadow-xl border border-purple-100 flex items-center space-x-2 z-40" id="chat-input-bar">
+<div class="chat-composer-fixed rounded-full p-1.5 flex items-center space-x-2" id="chat-input-bar">
 <button class="w-9 h-9 rounded-full bg-purple-100 text-brand-primary flex items-center justify-center text-sm active:scale-95 transition" onclick="toggleAttachmentMenu()">
 <i class="fa-solid fa-plus"></i>
 </button>
-<input class="flex-1 text-xs border-0 focus:ring-0 px-2 text-gray-800 placeholder-gray-400 bg-transparent" id="chat-input-field" onkeydown="if(event.key==='Enter') sendChatMessage()" placeholder="Type a message..." type="text"/>
-<div class="flex items-center space-x-1.5 pr-1 text-gray-400">
-<button class="hover:text-brand-primary p-1.5" onclick="openFileAttachmentModal()">
+<input class="flex-1 text-xs border-0 focus:ring-0 px-2 bg-transparent" id="chat-input-field" oninput="updateComposerAction()" onkeydown="if(event.key==='Enter'){event.preventDefault(); sendChatMessage();}" placeholder="Type a message..." type="text"/>
+<div class="flex items-center space-x-1.5 pr-1">
+<button class="composer-tool hover:text-white p-1.5" onclick="openFileAttachmentModal()" aria-label="Attach a file">
 <i class="fa-solid fa-paperclip text-sm"></i>
 </button>
-<button class="hover:text-brand-primary p-1.5" onclick="insertQuickEmoji('👍')">
+<button class="composer-tool hover:text-white p-1.5" onclick="insertQuickEmoji('👍')" aria-label="Add emoji">
 <i class="fa-regular fa-face-smile text-sm"></i>
 </button>
-<button class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center text-xs active:scale-90 transition shadow-sm" onclick="startVoiceRecordingFlow()">
-<i class="fa-solid fa-microphone"></i>
+<button class="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center text-xs active:scale-90 transition shadow-sm" id="chat-send-or-voice" onclick="handleComposerAction()" aria-label="Record voice message">
+<i class="fa-solid fa-microphone" id="chat-send-or-voice-icon"></i>
 </button>
 </div>
 </div>
 <!-- Quick Attachments Popup Drawer -->
-<div class="hidden absolute bottom-20 left-4 right-4 bg-white rounded-3xl p-4 shadow-2xl border border-purple-100 z-50 transition-all" id="quick-attach-drawer">
+<div class="quick-attach-fixed hidden bg-white rounded-3xl p-4 shadow-2xl border border-purple-100 transition-all" id="quick-attach-drawer">
 <div class="grid grid-cols-4 gap-2 text-center text-xs">
 <button class="flex flex-col items-center p-2 hover:bg-purple-50 rounded-xl" onclick="openFileAttachmentModal(); toggleAttachmentMenu();">
 <div class="w-10 h-10 rounded-full bg-purple-100 text-brand-primary flex items-center justify-center mb-1">
@@ -930,7 +959,7 @@
 <i class="fa-solid fa-cloud-arrow-up"></i>
 </div>
 <p class="text-xs font-semibold text-gray-800">Tap to upload <span class="text-gray-500 font-normal">or drag &amp; drop</span></p>
-<input class="hidden" id="modal-raw-file" onchange="closeFileAttachmentModal(); alert('File attached.');" type="file"/>
+<input accept="image/*,video/*,.pdf,.doc,.docx,.zip" class="hidden" id="modal-raw-file" onchange="handleChatAttachmentSelected(event)" type="file"/>
 </div>
 <button class="w-full py-3 bg-brand-primary text-white rounded-xl font-bold text-xs shadow-md" onclick="sendSelectedAttachment()">
           Upload &amp; Send to Chat
@@ -1412,6 +1441,7 @@
 <script data-purpose="chat-engine">
     let recordTimerInterval;
     let secondsElapsed = 0;
+    let selectedChatAttachment = null;
 
     function openChatThread(name, role) {
       if (name === 'HAVCAN Support') {
@@ -1449,10 +1479,11 @@
 
     function sendChatMessage() {
       const input = document.getElementById('chat-input-field');
+      const container = document.getElementById('chat-messages-container');
+      if (!input || !container) return;
       const text = input.value.trim();
       if (!text) return;
 
-      const container = document.getElementById('chat-messages-container');
       const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
       const msgNode = document.createElement('div');
@@ -1468,6 +1499,7 @@
       `;
       container.appendChild(msgNode);
       input.value = '';
+      updateComposerAction();
       container.scrollTop = container.scrollHeight;
 
       setTimeout(() => {
@@ -1488,7 +1520,24 @@
     function insertQuickEmoji(emoji) {
       const input = document.getElementById('chat-input-field');
       input.value += emoji;
+      updateComposerAction();
       input.focus();
+    }
+
+    function updateComposerAction() {
+      const input = document.getElementById('chat-input-field');
+      const icon = document.getElementById('chat-send-or-voice-icon');
+      const button = document.getElementById('chat-send-or-voice');
+      if (!input || !icon || !button) return;
+      const hasText = input.value.trim().length > 0;
+      icon.className = hasText ? 'fa-solid fa-arrow-up' : 'fa-solid fa-microphone';
+      button.setAttribute('aria-label', hasText ? 'Send message' : 'Record voice message');
+    }
+
+    function handleComposerAction() {
+      const input = document.getElementById('chat-input-field');
+      if (input && input.value.trim()) sendChatMessage();
+      else startVoiceRecordingFlow();
     }
 
     function toggleAttachmentMenu() {
@@ -1553,22 +1602,44 @@
     function closeFileAttachmentModal() {
       document.getElementById('file-attachment-modal').classList.add('hidden');
     }
-    function sendSelectedAttachment() {
+
+    function handleChatAttachmentSelected(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      selectedChatAttachment = file;
       closeFileAttachmentModal();
+      appendAttachmentMessage(file);
+      selectedChatAttachment = null;
+      event.target.value = '';
+    }
+
+    function appendAttachmentMessage(file) {
       const container = document.getElementById('chat-messages-container');
+      if (!container) return;
+      const isVideo = file.type.startsWith('video/');
+      const size = file.size ? `${(file.size / (1024 * 1024)).toFixed(1)} MB` : 'Uploaded file';
       const node = document.createElement('div');
       node.className = 'flex justify-end';
       node.innerHTML = `
-        <div class="max-w-[80%] bg-brand-primary text-white p-3 rounded-2xl rounded-tr-sm text-xs shadow-sm flex items-center space-x-2">
-          <i class="fa-solid fa-file-arrow-up text-base"></i>
-          <div>
-            <h5 class="font-bold truncate max-w-[130px]">Brand_Guidelines.pdf</h5>
-            <span class="text-[9px] text-purple-200">2.4 MB • Delivered</span>
+        <div class="max-w-[82%] bg-brand-primary text-white p-3 rounded-2xl rounded-tr-sm text-xs shadow-sm flex items-center space-x-2">
+          <i class="fa-solid ${isVideo ? 'fa-file-video' : 'fa-file-arrow-up'} text-base"></i>
+          <div class="min-w-0">
+            <h5 class="font-bold truncate max-w-[150px]">${escapeHTML(file.name)}</h5>
+            <span class="text-[9px] text-purple-200">${size} • Sending <i class="fa-solid fa-check ml-1"></i></span>
           </div>
-        </div>
-      `;
+        </div>`;
       container.appendChild(node);
       container.scrollTop = container.scrollHeight;
+    }
+
+    function sendSelectedAttachment() {
+      closeFileAttachmentModal();
+      if (selectedChatAttachment) {
+        appendAttachmentMessage(selectedChatAttachment);
+        selectedChatAttachment = null;
+        return;
+      }
+      appendAttachmentMessage({ name: 'Brand_Guidelines.pdf', size: 2.4 * 1024 * 1024, type: 'application/pdf' });
     }
 
     function openPaymentModal() {
