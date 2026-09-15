@@ -9,6 +9,7 @@
 
   let currentUser = null;
   let authMode = 'login';
+  let pendingAction = null;
 
   function get(id) {
     return document.getElementById(id);
@@ -65,22 +66,50 @@
 
   function showApp() {
     const gate = get('auth-gate');
-    if (gate) gate.classList.add('hidden');
+    if (gate) {
+      gate.classList.add('hidden');
+      gate.setAttribute('aria-hidden', 'true');
+    }
     const main = get('app-viewport');
     if (main) main.removeAttribute('aria-hidden');
   }
 
   function showGate() {
     const gate = get('auth-gate');
-    if (gate) gate.classList.remove('hidden');
+    if (gate) {
+      gate.classList.remove('hidden');
+      gate.removeAttribute('aria-hidden');
+    }
     const main = get('app-viewport');
     if (main) main.setAttribute('aria-hidden', 'true');
   }
 
+  function resumePendingAction() {
+    const action = pendingAction;
+    pendingAction = null;
+    if (typeof action === 'function') {
+      global.setTimeout(action, 0);
+    }
+  }
+
+  function showLogin(action) {
+    if (typeof action === 'function') pendingAction = action;
+    showGate();
+    updateAuthMode('login');
+    const email = get('auth-login-form')?.querySelector('[name="email"]');
+    if (email) global.setTimeout(() => email.focus(), 0);
+  }
+
+  function requireAuth(action) {
+    if (currentUser) return true;
+    showLogin(action);
+    return false;
+  }
+
   function updateAuthMode(mode) {
     authMode = mode;
-    const login = get('auth-login-panel');
-    const signup = get('auth-signup-panel');
+    const login = get('auth-login-panel') || get('auth-login-form');
+    const signup = get('auth-signup-panel') || get('auth-signup-form');
     const forgot = get('auth-forgot-panel');
     if (login) login.classList.toggle('hidden', mode !== 'login');
     if (signup) signup.classList.toggle('hidden', mode !== 'signup');
@@ -121,6 +150,7 @@
       hydrateUser(result.user);
       showApp();
       form.reset();
+      resumePendingAction();
     } catch (error) {
       showAuthError(error);
     } finally {
@@ -173,8 +203,12 @@
       setStatus(error.message, true);
     }
     currentUser = null;
-    showGate();
+    pendingAction = null;
+    showApp();
     updateAuthMode('login');
+    if (typeof global.switchNav === 'function') {
+      global.switchNav('home', get('nav-btn-home'));
+    }
   }
 
   async function initialize() {
@@ -183,7 +217,8 @@
       hydrateUser(result.user);
       showApp();
     } catch (error) {
-      showGate();
+      currentUser = null;
+      showApp();
       updateAuthMode('login');
       if (error.status && error.status !== 401) {
         setStatus('Authentication service is unavailable. Please try again shortly.', true);
@@ -214,10 +249,8 @@
   global.HavcanAuth = Object.freeze({
     getUser: () => currentUser,
     logout,
-    showLogin: () => {
-      showGate();
-      updateAuthMode('login');
-    },
+    requireAuth,
+    showLogin,
   });
 
   document.addEventListener('DOMContentLoaded', bind);

@@ -7,8 +7,12 @@ const SHELL_ASSETS = [
   './frontend/app-state.js',
   './frontend/auth.js',
   './pwa/register.js',
-  './assets/icons/icon-192.svg',
-  './assets/icons/icon-512.svg',
+  './assets/icons/favicon.ico',
+  './assets/icons/favicon-16x16.png',
+  './assets/icons/favicon-32x32.png',
+  './assets/icons/apple-touch-icon.png',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
 ];
 
 self.addEventListener('install', (event) => {

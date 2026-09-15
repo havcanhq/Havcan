@@ -4,7 +4,9 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
 <title>HAVCAN - Creative Work, Handled.</title>
-<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%235320c9'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='52' font-family='Arial' font-weight='700' fill='white'%3EH%3C/text%3E%3C/svg%3E" rel="icon"/>
+<link href="./assets/icons/favicon.ico" rel="icon" type="image/x-icon"/>
+<link href="./assets/icons/favicon-16x16.png" rel="icon" type="image/png" sizes="16x16"/>
+<link href="./assets/icons/favicon-32x32.png" rel="icon" type="image/png" sizes="32x32"/>
 <!-- Tailwind CSS v3 with Plugins -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Font Awesome & Google Fonts -->
@@ -13,7 +15,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="./manifest.webmanifest" rel="manifest"/>
-<link href="./assets/icons/icon-192.svg" rel="apple-touch-icon"/>
+<link href="./assets/icons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
 <meta content="#5320c9" name="theme-color"/>
 <script data-purpose="tailwind-config">
     tailwind.config = {
@@ -1032,7 +1034,7 @@
 </nav>
 </div>
 <!-- AUTHENTICATION GATE -->
-<div aria-labelledby="auth-title" aria-modal="true" class="absolute inset-0 z-[70] flex items-center justify-center bg-[#FBF9FE] px-5 py-8" id="auth-gate" role="dialog">
+<div aria-hidden="true" aria-labelledby="auth-title" aria-modal="true" class="hidden absolute inset-0 z-[70] flex items-center justify-center bg-[#FBF9FE] px-5 py-8" id="auth-gate" role="dialog">
 <div class="w-full max-w-sm">
 <div class="flex items-center justify-center space-x-2 mb-8">
 <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-700 via-brand-primary to-indigo-500 flex items-center justify-center text-white shadow-md shadow-brand-500/30">
@@ -1408,6 +1410,19 @@
     }
   </script>
 <script data-purpose="navigation-and-visibility">
+    const PROTECTED_SCREEN_IDS = new Set([
+      'screen-start-project',
+      'screen-orders',
+      'screen-order-detail',
+      'screen-project-detail',
+      'screen-chat-list',
+      'screen-chat-thread',
+      'screen-share-files',
+      'screen-support-chat',
+      'screen-profile'
+    ]);
+    const PROTECTED_NAV_ROUTES = new Set(['orders', 'chat', 'profile']);
+
     function setBottomNavVisibility(visible) {
       const nav = document.getElementById('global-bottom-nav');
       if (!nav) return;
@@ -1421,6 +1436,14 @@
     }
 
     function switchScreen(screenId) {
+      if (
+        PROTECTED_SCREEN_IDS.has(screenId)
+        && globalThis.HavcanAuth
+        && !globalThis.HavcanAuth.requireAuth(() => switchScreen(screenId))
+      ) {
+        return;
+      }
+
       document.querySelectorAll('.screen-view').forEach(view => {
         view.classList.add('hidden');
         view.classList.remove('active');
@@ -1444,6 +1467,14 @@
     function switchNav(route, buttonEl) {
       if (!buttonEl) {
         buttonEl = document.getElementById(`nav-btn-${route}`);
+      }
+
+      if (
+        PROTECTED_NAV_ROUTES.has(route)
+        && globalThis.HavcanAuth
+        && !globalThis.HavcanAuth.requireAuth(() => switchNav(route, buttonEl))
+      ) {
+        return;
       }
 
       document.querySelectorAll('.nav-item').forEach(btn => {
@@ -1702,6 +1733,10 @@
     }
 
     function openPaymentModal() {
+      if (
+        globalThis.HavcanAuth
+        && !globalThis.HavcanAuth.requireAuth(() => openPaymentModal())
+      ) return;
       document.getElementById('payment-modal').classList.remove('hidden');
     }
     function closePaymentModal() {
@@ -1789,6 +1824,10 @@
       switchScreen('screen-start-project');
     }
     function submitProjectWizard() {
+      if (
+        globalThis.HavcanAuth
+        && !globalThis.HavcanAuth.requireAuth(() => submitProjectWizard())
+      ) return;
       if (projectWizardStep < 5) {
         projectWizardStep++;
         renderWizardStep();
@@ -1816,6 +1855,10 @@
     }
 
     function sendSharedFiles() {
+      if (
+        globalThis.HavcanAuth
+        && !globalThis.HavcanAuth.requireAuth(() => sendSharedFiles())
+      ) return;
       alert('Selected files are ready to share with your creative team.');
     }
 
@@ -1830,6 +1873,10 @@
       alert('Playing video draft preview...');
     }
     function downloadFileMock(fileName) {
+      if (
+        globalThis.HavcanAuth
+        && !globalThis.HavcanAuth.requireAuth(() => downloadFileMock(fileName))
+      ) return;
       alert(`Downloading ${fileName}...`);
     }
 
