@@ -1,1 +1,0 @@
-"""Backend configuration and shared application concerns."""

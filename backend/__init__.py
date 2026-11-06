@@ -1,1 +1,0 @@
-"""HAVCAN backend package."""
